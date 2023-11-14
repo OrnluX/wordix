@@ -3,13 +3,14 @@ Juego Wordix. Desarrollado en Introducción a la programación (FAI)
 
 # Materia 2023
 
-Introduccion a la programacion
+Introducción a la programación
 Tecnicatura en Desarrollo Web 
-Facultad de Informatica
+Facultad de Informática
 Universidad Nacional Del Comahue 
 
 # Integrantes del Grupo
 
 - **Agustin Villegas** - Legajo 4366 - maximiliano.villegas@est.fi.uncoma.edu.ar
+- **Sergio Ivan Tarquini** - Legajo 5010 - ivantarquini91@gmail.com - Github: OrnluX
 
 
