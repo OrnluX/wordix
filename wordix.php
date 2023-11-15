@@ -120,7 +120,8 @@ function escribirSegunEstado($texto, $estado)
 }
 
 /**
- * ****COMPLETAR*****
+ * Función que muestra un mensaje de bienvenida al usuario.
+ * @param STRING $usuario
  */
 function escribirMensajeBienvenida($usuario)
 {
@@ -133,7 +134,9 @@ function escribirMensajeBienvenida($usuario)
 
 
 /**
- * ****COMPLETAR*****
+ * Función que verifica si una cadena de texto ingresada por el usuario contiene únicamente caracteres alfabéticos. Utiliza una estructura de control repetitiva para recorrer la cadena y verificar cada uno de sus caracteres. Si la cadena de texto solo contiene letras alfabéticas devuelve true, de lo contrario devuelve false.
+ * @param STRING $cadena
+ * @return BOOLEAN
  */
 function esPalabra($cadena)
 {
@@ -149,7 +152,8 @@ function esPalabra($cadena)
 }
 
 /**
- *  ****COMPLETAR*****
+ * Función que imprime en pantalla un mensaje al usuario, solicitándole que ingrese una palabra, la cual será analizada. Si la palabra contiene 5 letras, y todos sus caracteres son alfabéticos, retornará la misma en mayúsculas, de lo contrario aparecerá el mensaje nuevamente y se repetirá el proceso.
+ * @return STRING
  */
 function leerPalabra5Letras()
 {
@@ -167,7 +171,7 @@ function leerPalabra5Letras()
 
 
 /**
- * Inicia una estructura de datos Teclado. La estructura es de tipo: ¿Indexado, asociativo o Multidimensional?
+ * Inicia una estructura de datos Teclado. La estructura es de tipo asociativo.
  *@return array
  */
 function iniciarTeclado()
