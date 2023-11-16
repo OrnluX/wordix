@@ -106,8 +106,40 @@ return $coleccionPartidas;
 
 
 /**PUNTO 4 */
-/**Una opcion que pida al usuario ingresar una palabra de 5 letras y retorne la palabra. En la biblioteca wordix ya esta declarada. Aca tenemos que llamarla unicamente. La llamada va a retornar la palabra en mayusculas si cumple con la validacion interna de la funcion. */
+/**Una opcion que pida al usuario ingresar una palabra de 5 letras y retorne la palabra. En la biblioteca wordix ya esta declarada. Aca tenemos que llamarla unicamente. La llamada va a retornar la palabra en mayusculas si cumple con la validacion interna de la funcion. 
 
+* @param ARRAY $coleccionPalabras
+* @return ARRAY 
+*/
+
+function agregarPalabra($coleccionPalabras)
+{
+  /* STRING $palabra;
+  INT $indice=0;
+  BOOLEAN $palabraExiste=true;
+  INT $cantidadPalabras;*/
+  $indice = 0;
+  $palabraExiste = false;
+  $cantidadPalabras = count($coleccionPalabras);
+  $palabra = leerPalabra5letras(); //Funcion de wordix que descarta palabras que no sean de 5 letras y convierte las letras de en mayusculas
+  do 
+  { 
+    if ($coleccionPalabras[$indice] == $palabra) { //verificamos que la palabra no esta en la coleccion
+      $palabraExiste = true;
+    } else {
+      $indice++;
+    }
+  } while (!$palabraExiste && $indice < $cantidadPalabras);
+  
+  if (!$palabraExiste)//si la palabra no existe en la coleccion se agrega en el array 
+  {
+    array_push($coleccionPalabras, $palabra); 
+    echo "Se agregó una nueva palabra a la colección!\n";
+  }else{
+    echo "La palabra ya existe en la colección\n";
+  }
+  return $coleccionPalabras;
+}
 
 
 
