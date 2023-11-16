@@ -32,6 +32,30 @@ function cargarColeccionPalabras()
 /* PUNTO 2 EXPLICACION 3 */
 /**una funcion llamada cargarPartidas que inicialice una estructura de datos con ejemplos de partidas y que retorne la coleccion de partidas. Minimo 10 partidas donde vayan variando los jugadores, las palabras, los intentos y los puntajes. En algunos casos las palabras y los jugadores se deben repetir */
 
+function cargarPartidas ()
+{
+    /*
+    array $coleccionPartidas
+    */
+    $coleccionPartidas = [];
+    $p1 = ["palabraWordix" => "QUESO", "jugador" => "ivan", "intentos" => 0, "puntaje" => 8];
+    $p2 = ["palabraWordix" => "AYUDA", "jugador" => "agus", "intentos" => 5, "puntaje" => 10];
+    $p3 = ["palabraWordix" => "HUEVO", "jugador" => "exe", "intentos" => 2, "puntaje" => 7];
+    $p4 = ["palabraWordix" => "TINTO", "jugador" => "karim", "intentos" => 0, "puntaje" => 8];
+    $p5 = ["palabraWordix" => "RASGO", "jugador" => "karim", "intentos" => 3, "puntaje" => 0];
+    $p6 = ["palabraWordix" => "AYUDA", "jugador" => "ivan", "intentos" => 0, "puntaje" => 9];
+    $p7 = ["palabraWordix" => "CERCA", "jugador" => "lolo", "intentos" => 4, "puntaje" => 7];
+    $p8 = ["palabraWordix" => "GASTO", "jugador" => "exe", "intentos" => 4, "puntaje" => 0];
+    $p9 = ["palabraWordix" => "QUESO", "jugador" => "adrian", "intentos" => 2, "puntaje" => 0];
+    $p10 = ["palabraWordix" => "GOTAS", "jugador" => "maxi", "intentos" => 5, "puntaje" => 7];
+    $p11 = ["palabraWordix" => "FORMA", "jugador" => "ivan", "intentos" => 0, "puntaje" => 9];
+    $p12 = ["palabraWordix" => "DEDOS", "jugador" => "karim", "intentos" => 3, "puntaje" => 10];
+
+array_push($coleccionPartidas, $p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9, $p10, $p11, $p12);
+return $coleccionPartidas;
+}
+
+
 
 
 
