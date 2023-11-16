@@ -27,7 +27,10 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 /**************************************/
 
 /**
- *  ****COMPLETAR*****
+ * Función que lee un número ingresado por el usuario en un rango determinado y verfica: primero que el número sea un caracter numérico entero y luego que se encuentre en el rango. Si no cumple con TODAS las condiciones se le pedirá un número al usuario hasta que este sea válido. Cuando las condiciones se cumplan, se retornará el número validado.
+ * @param INT $min
+ * @param INT $max
+ * @return INT
  */
 function solicitarNumeroEntre($min, $max)
 {
@@ -332,7 +335,11 @@ function esIntentoGanado($estructuraPalabraIntento)
 }
 
 /**
- * ****COMPLETAR***** documentación de la intefaz
+ * Función que calcula el puntaje de una partida de wordix. 
+ * @param INT $intento
+ * @param STRING $palabraElegida
+ * @return INT
+ * 
  */
 function obtenerPuntajeWordix()  /* ****COMPLETAR***** parámetros formales necesarios */
 {
