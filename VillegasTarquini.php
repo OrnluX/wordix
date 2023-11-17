@@ -29,14 +29,11 @@ function cargarColeccionPalabras()
     return ($coleccionPalabras);
 }
 
-/* PUNTO 2 EXPLICACION 3 */
-/**una funcion llamada cargarPartidas que inicialice una estructura de datos con ejemplos de partidas y que retorne la coleccion de partidas. Minimo 10 partidas donde vayan variando los jugadores, las palabras, los intentos y los puntajes. En algunos casos las palabras y los jugadores se deben repetir */
-
-function cargarPartidas ()
-{
-    /*
-    array $coleccionPartidas
-    */
+/* PUNTO 2*/
+//COMPLETAR DOCUMENTACION
+function cargarPartidas() {
+    //ARRAY $coleccionPartidas
+    
     $coleccionPartidas = [];
     $p1 = ["palabraWordix" => "QUESO", "jugador" => "ivan", "intentos" => 0, "puntaje" => 8];
     $p2 = ["palabraWordix" => "AYUDA", "jugador" => "agus", "intentos" => 5, "puntaje" => 10];
@@ -51,73 +48,87 @@ function cargarPartidas ()
     $p11 = ["palabraWordix" => "FORMA", "jugador" => "ivan", "intentos" => 0, "puntaje" => 9];
     $p12 = ["palabraWordix" => "DEDOS", "jugador" => "karim", "intentos" => 3, "puntaje" => 10];
 
-array_push($coleccionPartidas, $p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9, $p10, $p11, $p12);
-return $coleccionPartidas;
+  array_push($coleccionPartidas, $p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9, $p10, $p11, $p12);
+  return $coleccionPartidas;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**PUNTO 3 */
-/**Para visualizar el menu de opciones, una funcion seleccionarOpcion que muestre las opciones del menu en la pantalla, le solicite al usuario una opcion valida (si la opcion no es valida vuelta a solicitarla en la misma funcion hasta que la opcion lo sea), y retorne el numero de la opcion elegida. La ultima opcion debe ser salir */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/** Función que muestra el menú principal en pantalla. Luego le pide la usuario que ingrese un número válido (correspondiente a la opción del menú que desea ejecutar). Si la opción no es válida, se le seguirá pidiendo al usuario un número, hasta que sea válido. La función retorna el número de opción elegida.
+ * @return INT
+*/
+function seleccionarOpcion(){
+  echo "Menú de opciones \n";
+  echo "1- Jugar al Wordix con una palabra elegida \n";
+  echo "2- Jugar al Wordix con una palabra aleatoria \n";
+  echo "3- Mostrar una partida \n";
+  echo "4- Mostrar la primer partida ganadora \n";
+  echo "5- Mostrar resumen del jugador \n";
+  echo "6- Mostrar listado de partidas ordenadas por jugador y por palabra \n";
+  echo "7- Agregar una palabra de 5 letras a Wordix \n";
+  echo "8- Salir del programa \n";
+  echo " \n";
+  echo "Ingrese la opción deseada: ";
+  return solicitarNumeroEntre(1,8);
+}
 
 /**PUNTO 4 */
-/**Una opcion que pida al usuario ingresar una palabra de 5 letras y retorne la palabra. En la biblioteca wordix ya esta declarada. Aca tenemos que llamarla unicamente. La llamada va a retornar la palabra en mayusculas si cumple con la validacion interna de la funcion. 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**PUNTO 5 */
+/**Una funcion que solicite al usuario un numero entre un rango de valores. Si el numero ingresado por el usuario no es valido, la funcion se encarga de volver a pedirlo. La funcion retorna un numero valido. Tambien esta declarada en la biblioteca de wordix. Podriamos optimizar un poco ese mensaje */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**PUNTO 7 */
+/** COMPLETAR DOCUMENTACION
 * @param ARRAY $coleccionPalabras
 * @return ARRAY 
 */
-
 function agregarPalabra($coleccionPalabras)
 {
-  /* STRING $palabra;
-  INT $indice=0;
-  BOOLEAN $palabraExiste=true;
-  INT $cantidadPalabras;*/
+  // STRING $palabra
+  //INT $indice
+  //BOOLEAN $palabraExiste
+  //INT $cantidadPalabras
   $indice = 0;
   $palabraExiste = false;
   $cantidadPalabras = count($coleccionPalabras);
@@ -140,26 +151,6 @@ function agregarPalabra($coleccionPalabras)
   }
   return $coleccionPalabras;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**PUNTO 5 */
-/**Una funcion que solicite al usuario un numero entre un rango de valores. Si el numero ingresado por el usuario no es valido, la funcion se encarga de volver a pedirlo. La funcion retorna un numero valido. Tambien esta declarada en la biblioteca de wordix. Podriamos optimizar un poco ese mensaje */
-
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -172,7 +163,7 @@ function agregarPalabra($coleccionPalabras)
 
 //Proceso:
 
-$partida = jugarWordix("MELON", strtolower("MaJo"));
+//$partida = jugarWordix("MELON", strtolower("MaJo"));
 //print_r($partida);
 //imprimirResultado($partida);
 
