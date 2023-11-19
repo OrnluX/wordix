@@ -78,52 +78,14 @@ function seleccionarOpcion(){
   return solicitarNumeroEntre(1,8);
 }
 
-/**PUNTO 4 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**PUNTO 5 */
-/**Una funcion que solicite al usuario un numero entre un rango de valores. Si el numero ingresado por el usuario no es valido, la funcion se encarga de volver a pedirlo. La funcion retorna un numero valido. Tambien esta declarada en la biblioteca de wordix. Podriamos optimizar un poco ese mensaje */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**PUNTO 6 */
+/** Función que dado un número de partida (que corresponde al índice de un arreglo indexado de partidas) muestra en pantalla los datos de una partida particular.
+ * @param INT $nroPartida
+ * @param ARRAY $coleccion
+*/
+function mostrarPartida($nroPartida, $coleccion) {
+  print_r($coleccion[$nroPartida]);
+}
 
 /**PUNTO 7 */
 /** COMPLETAR DOCUMENTACION
@@ -132,7 +94,7 @@ function seleccionarOpcion(){
 */
 function agregarPalabra($coleccionPalabras)
 {
-  // STRING $palabra
+  //STRING $palabra
   //INT $indice
   //BOOLEAN $palabraExiste
   //INT $cantidadPalabras
@@ -159,9 +121,38 @@ function agregarPalabra($coleccionPalabras)
   return $coleccionPalabras;
 }
 
+/**PUNTO 8 */
+/** Función que dada una colección de partidas y el nombre de un jugador, retorna el índice de la primer partida ganada por dicho jugador. Si el jugador no ganó ninguna partida, la función retornará -1
+ * @param ARRAY $partidas
+ * @param STRING $nombre
+ * @return INT
+*/
+function primerPartidaGanada($partidas, $nombre){
+  //INT $indice
+  $nombre = strtolower($nombre);
+  $indice = 0;
+  
+  while ( $indice < count($partidas) && $partidas[$indice]["jugador"] != $nombre) {
+    $indice++;
+  }
+
+  if ($indice == count($partidas)) {
+    $indice = -1;
+  }
+  
+  return $indice;
+}
+
+
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
+
+//Prueba funcionalidad.
+$partidasCargadas = cargarPartidas(10, cargarColeccionPalabras());
+print_r($partidasCargadas);
+echo "Indice primer partida: " . primerPartidaGanada($partidasCargadas, "ivan");
+
 
 //Declaración de variables:
 
