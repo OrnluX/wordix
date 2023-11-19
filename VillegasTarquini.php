@@ -15,7 +15,7 @@ include_once("wordix.php");
 
 /**
  * Obtiene una colección de palabras
- * @return array
+ * @return ARRAY
  */
 function cargarColeccionPalabras()
 {
@@ -30,26 +30,33 @@ function cargarColeccionPalabras()
 }
 
 /* PUNTO 2*/
-//COMPLETAR DOCUMENTACION
-function cargarPartidas() {
-    //ARRAY $coleccionPartidas
-    
-    $coleccionPartidas = [];
-    $p1 = ["palabraWordix" => "QUESO", "jugador" => "ivan", "intentos" => 0, "puntaje" => 8];
-    $p2 = ["palabraWordix" => "AYUDA", "jugador" => "agus", "intentos" => 5, "puntaje" => 10];
-    $p3 = ["palabraWordix" => "HUEVO", "jugador" => "exe", "intentos" => 2, "puntaje" => 7];
-    $p4 = ["palabraWordix" => "TINTO", "jugador" => "karim", "intentos" => 0, "puntaje" => 8];
-    $p5 = ["palabraWordix" => "RASGO", "jugador" => "karim", "intentos" => 3, "puntaje" => 0];
-    $p6 = ["palabraWordix" => "AYUDA", "jugador" => "ivan", "intentos" => 0, "puntaje" => 9];
-    $p7 = ["palabraWordix" => "CERCA", "jugador" => "lolo", "intentos" => 4, "puntaje" => 7];
-    $p8 = ["palabraWordix" => "GASTO", "jugador" => "exe", "intentos" => 4, "puntaje" => 0];
-    $p9 = ["palabraWordix" => "QUESO", "jugador" => "adrian", "intentos" => 2, "puntaje" => 0];
-    $p10 = ["palabraWordix" => "GOTAS", "jugador" => "maxi", "intentos" => 5, "puntaje" => 7];
-    $p11 = ["palabraWordix" => "FORMA", "jugador" => "ivan", "intentos" => 0, "puntaje" => 9];
-    $p12 = ["palabraWordix" => "DEDOS", "jugador" => "karim", "intentos" => 3, "puntaje" => 10];
+/** Función que inicializa una estructura de datos con ejemplos de partidas y retorna la colección con datos aleatorios. El número de partidas es arbitrario.
+ * @param INT $cantidadPartidas
+ * @param ARRAY $palabras
+ * @return ARRAY
+*/
+function cargarPartidas ($cantidadPartidas, $palabras) {
+  //ARRAY $estadisticasPartidas, $nuevaPartida, $jugadores
 
-  array_push($coleccionPartidas, $p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9, $p10, $p11, $p12);
-  return $coleccionPartidas;
+  $jugadores = ["ivan", "jose", "emiliano", "gaston", "german", "carolina", "antonella", "agustin", "gonzalo", "mario", "roberto", "cristian", "miguel", "daiana", "florencia", "marta", "julieta", "fernanda", "ana", "marcos"];
+
+  $estadisticasPartidas = [];
+
+  $nuevaPartida = [
+       "palabraWordix" => "",
+       "jugador" => "",
+       "intentos" => 0,
+       "puntaje" => 0
+  ];
+  
+  for ($i = 0; $i < $cantidadPartidas; $i++) {
+      $nuevaPartida["palabraWordix"] = $palabras[(rand(0,19))];
+      $nuevaPartida["jugador"] = $jugadores[(rand(0,19))];
+      $nuevaPartida["intentos"] = rand(1,6);
+      $nuevaPartida["puntaje"] = rand(1,12);
+      array_push($estadisticasPartidas, $nuevaPartida);
+  }
+    return $estadisticasPartidas;
 }
 
 /**PUNTO 3 */
@@ -151,6 +158,7 @@ function agregarPalabra($coleccionPalabras)
   }
   return $coleccionPalabras;
 }
+
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -192,3 +200,4 @@ do {
     }
 } while ($opcion != X);
 */
+
