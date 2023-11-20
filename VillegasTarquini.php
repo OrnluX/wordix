@@ -37,6 +37,7 @@ function cargarColeccionPalabras()
 */
 function cargarPartidas ($cantidadPartidas, $palabras) {
   //ARRAY $estadisticasPartidas, $nuevaPartida, $jugadores
+  //INT $probabilidad
 
   $jugadores = ["ivan", "jose", "emiliano", "gaston", "german", "carolina", "antonella", "agustin", "gonzalo", "mario", "roberto", "cristian", "miguel", "daiana", "florencia", "marta", "julieta", "fernanda", "ana", "marcos"];
 
@@ -49,13 +50,27 @@ function cargarPartidas ($cantidadPartidas, $palabras) {
        "puntaje" => 0
   ];
   
+  $probabilidad = rand(1,10);
+  
   for ($i = 0; $i < $cantidadPartidas; $i++) {
-      $nuevaPartida["palabraWordix"] = $palabras[(rand(0,19))];
-      $nuevaPartida["jugador"] = $jugadores[(rand(0,19))];
-      $nuevaPartida["intentos"] = rand(1,6);
+      $nuevaPartida["palabraWordix"] = $palabras[(rand(0,(count($palabras)-1)))];
+      $nuevaPartida["jugador"] = $jugadores[(rand(0,(count($jugadores)-1)))];
+      
+      if ($probabilidad < 8) {
+        $nuevaPartida["intentos"] = 6;
+      }
+      else {
+        $nuevaPartida["intentos"] = rand(1,6);
+      }
       
       if (($nuevaPartida["intentos"]) == 6) {
-        $nuevaPartida["puntaje"] = 0;
+        $probabilidad = rand(1,10);
+        if ($probabilidad < 8) {
+          $nuevaPartida["puntaje"] = 0;
+        }
+        else {
+          $nuevaPartida["puntaje"] = rand(3,6);
+        }
       }
       else if (($nuevaPartida["intentos"]) > 3){
         $nuevaPartida["puntaje"] = rand(6,9);
@@ -169,16 +184,82 @@ function primerPartidaGanada($partidas, $nombre){
   return $indice;
 }
 
+/**PUNTO 9 */
+/** Función que dada la colección de partidas y el nombre de un jugador, retorna el resumen del mismo
+ * @param ARRAY $partidas
+ * @param STRING $nombreJugador
+*/
+function estadisticasJugador($partidas, $nombreJugador){
+  //INT $partidasJugadas, $puntajeAcumulado, $victorias, $i
+  //FLOAT $porcVictorias
+  //ARRAY $adivinadaEnIntento
+  //STRING $pluralSingular
+  $adivinadaEnIntento = [
+    "1" => 0,
+    "2" => 0,
+    "3" => 0,
+    "4" => 0,
+    "5" => 0,
+    "6" => 0,
+  ];
+  
+  $partidasJugadas = 0;
+  $puntajeAcumulado = 0;
+  $victorias = 0;
+  $nombreJugador = strtolower($nombreJugador);
+  for ($i=0; $i < count($partidas); $i++) { 
+    if (($partidas[$i]["jugador"]) == $nombreJugador) {
+      $partidasJugadas++;
+      $puntajeAcumulado+=($partidas[$i]["puntaje"]);
+      if (($partidas[$i]["puntaje"]) != 0) {
+        $victorias++;
+        foreach ($adivinadaEnIntento as $nroIntento => $adivinadas) {
+          if ($nroIntento == ($partidas[$i]["intentos"])) {
+            $adivinadaEnIntento[$nroIntento] = $adivinadas+=1;
+          }
+        }
+      }
+    }
+  }
+
+  if ($partidasJugadas == 0) {
+    echo "El jugador " . $nombreJugador . " no ha registrado ninguna partida \n";
+  }
+  else {
+    if ($victorias != 0) {
+      $porcVictorias = ($victorias*100)/$partidasJugadas;
+    }
+    else {
+      $porcVictorias = 0;
+    }
+    echo "****************************************** \n";
+    echo "Jugador: " . $nombreJugador . " \n";
+    echo "Partidas: " . $partidasJugadas . " \n";
+    echo "Puntaje total: " . $puntajeAcumulado . " \n";
+    echo "Victorias: " . $victorias . " \n";
+    echo "Porcentaje de victorias: " . number_format($porcVictorias, 2) . " % \n";
+    echo "\033[4mAdivinadas:\033[0m\n";
+    foreach ($adivinadaEnIntento as $intento => $valor) {
+      if (($adivinadaEnIntento[$intento]) == 1) {
+        $pluralSingular = "vez.";
+      } 
+      else {
+        $pluralSingular = "veces.";
+      }
+      echo "Adivinó en el intento " . $intento . ": " . $valor . " ". $pluralSingular . " \n";
+    }
+    echo "****************************************** \n";
+  }
+}
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
 
 //Prueba funcionalidad.
-$partidasCargadas = cargarPartidas(50, cargarColeccionPalabras());
+$partidasCargadas = cargarPartidas(300, cargarColeccionPalabras());
 print_r($partidasCargadas);
-echo "Indice primer partida ganada: " . primerPartidaGanada($partidasCargadas, "IvAn") . " \n";
-mostrarPartida(0, $partidasCargadas);
+estadisticasJugador($partidasCargadas, "ivan");
 
 //Declaración de variables:
 
