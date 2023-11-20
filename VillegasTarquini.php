@@ -53,7 +53,16 @@ function cargarPartidas ($cantidadPartidas, $palabras) {
       $nuevaPartida["palabraWordix"] = $palabras[(rand(0,19))];
       $nuevaPartida["jugador"] = $jugadores[(rand(0,19))];
       $nuevaPartida["intentos"] = rand(1,6);
-      $nuevaPartida["puntaje"] = rand(1,12);
+      
+      if (($nuevaPartida["intentos"]) == 6) {
+        $nuevaPartida["puntaje"] = 0;
+      }
+      else if (($nuevaPartida["intentos"]) > 3){
+        $nuevaPartida["puntaje"] = rand(6,9);
+      }
+      else {
+        $nuevaPartida["puntaje"] = rand(10,15);
+      }
       array_push($estadisticasPartidas, $nuevaPartida);
   }
     return $estadisticasPartidas;
@@ -81,10 +90,27 @@ function seleccionarOpcion(){
 /**PUNTO 6 */
 /** Función que dado un número de partida (que corresponde al índice de un arreglo indexado de partidas) muestra en pantalla los datos de una partida particular.
  * @param INT $nroPartida
- * @param ARRAY $coleccion
+ * @param ARRAY $datosPartidas
 */
-function mostrarPartida($nroPartida, $coleccion) {
-  print_r($coleccion[$nroPartida]);
+function mostrarPartida($nroPartida, $datosPartidas) {
+  //INT $indice
+  if ($nroPartida > 0 && $nroPartida <= count($datosPartidas)) {
+    $indice = $nroPartida -1;
+    echo "****************************************** \n";
+    echo "Partida WORDIX nro " . $nroPartida . ": palabra " . $datosPartidas[$indice]["palabraWordix"] . " \n";
+    echo "Jugador/a: " . $datosPartidas[$indice]["jugador"] . " \n";
+    echo "Puntaje: " . $datosPartidas[$indice]["puntaje"] . " puntos \n";
+    if (($datosPartidas[$indice]["puntaje"]) == 0) {
+      echo "Intento: No adivinó la palabra \n";
+    } 
+    else {
+      echo "Intento: Adivinó la palabra en " . $datosPartidas[$indice]["intentos"] . " intento(s). \n";
+    }
+    echo "****************************************** \n";
+  } 
+  else {
+    echo "Error. Partida no encontrada. Por favor ingrese un número de partida válido \n";
+  }
 }
 
 /**PUNTO 7 */
@@ -149,10 +175,10 @@ function primerPartidaGanada($partidas, $nombre){
 /**************************************/
 
 //Prueba funcionalidad.
-$partidasCargadas = cargarPartidas(10, cargarColeccionPalabras());
+$partidasCargadas = cargarPartidas(50, cargarColeccionPalabras());
 print_r($partidasCargadas);
-echo "Indice primer partida: " . primerPartidaGanada($partidasCargadas, "ivan");
-
+echo "Indice primer partida ganada: " . primerPartidaGanada($partidasCargadas, "IvAn") . " \n";
+mostrarPartida(0, $partidasCargadas);
 
 //Declaración de variables:
 
