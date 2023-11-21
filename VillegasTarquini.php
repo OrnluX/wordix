@@ -111,7 +111,8 @@ function mostrarPartida($nroPartida, $datosPartidas) {
   //INT $indice
   if ($nroPartida > 0 && $nroPartida <= count($datosPartidas)) {
     $indice = $nroPartida -1;
-    echo "****************************************** \n";
+    escribirAmarillo("***********************************************");
+    echo " \n";
     echo "Partida WORDIX nro " . $nroPartida . ": palabra " . $datosPartidas[$indice]["palabraWordix"] . " \n";
     echo "Jugador/a: " . $datosPartidas[$indice]["jugador"] . " \n";
     echo "Puntaje: " . $datosPartidas[$indice]["puntaje"] . " puntos \n";
@@ -121,7 +122,8 @@ function mostrarPartida($nroPartida, $datosPartidas) {
     else {
       echo "Intento: Adivinó la palabra en " . $datosPartidas[$indice]["intentos"] . " intento(s). \n";
     }
-    echo "****************************************** \n";
+    escribirAmarillo("***********************************************");
+    echo " \n";
   } 
   else {
     echo "Error. Partida no encontrada. Por favor ingrese un número de partida válido \n";
@@ -221,23 +223,26 @@ function estadisticasJugador($partidas, $nombreJugador){
       }
     }
   }
-
+  
   if ($partidasJugadas == 0) {
     echo "El jugador " . $nombreJugador . " no ha registrado ninguna partida \n";
   }
   else {
+    
     if ($victorias != 0) {
       $porcVictorias = ($victorias*100)/$partidasJugadas;
     }
     else {
       $porcVictorias = 0;
     }
-    echo "****************************************** \n";
+    
+    escribirAmarillo("***********************************************");
+    echo " \n";
     echo "Jugador: " . $nombreJugador . " \n";
     echo "Partidas: " . $partidasJugadas . " \n";
     echo "Puntaje total: " . $puntajeAcumulado . " \n";
     echo "Victorias: " . $victorias . " \n";
-    echo "Porcentaje de victorias: " . number_format($porcVictorias, 2) . " % \n";
+    echo "Porcentaje de victorias: " . number_format($porcVictorias, 2) . " % \n\n";
     echo "\033[4mAdivinadas:\033[0m\n";
     foreach ($adivinadaEnIntento as $intento => $valor) {
       if (($adivinadaEnIntento[$intento]) == 1) {
@@ -246,20 +251,70 @@ function estadisticasJugador($partidas, $nombreJugador){
       else {
         $pluralSingular = "veces.";
       }
-      echo "Adivinó en el intento " . $intento . ": " . $valor . " ". $pluralSingular . " \n";
+      echo "            Adivinó en el intento " . $intento . ": " . $valor . " ". $pluralSingular . " \n";
     }
-    echo "****************************************** \n";
+    
+    escribirAmarillo("***********************************************");
+    echo " \n";
   }
 }
+
+/**PUNTO 10 */
+/** Función que solicita al usuario el nombre de un jugador y retorna el mismo en minúsculas. La función se asegura que el nombre comience con una letra del alfabeto.
+ * @return STRING 
+*/
+function solicitarJugador(){
+  //STRING $jugador
+  do {
+    echo "Ingrese el nombre del jugador: ";
+    $jugador = trim(fgets(STDIN));
+    if ((ctype_alpha($jugador[0]))) {
+      escribirVerde("El nombre ha sido ingresado correctamente... ");
+      echo " \n";
+    } 
+    else {
+      escribirRojo("Error. El nombre debe comenzar con una letra ");
+      echo " \n";
+    }
+  } while (!(ctype_alpha($jugador[0])));
+  return $jugador;
+}
+
+/**PUNTO 11 */
+/** Función que dada una colección de partidas muestra la colección ordenada por el nombre de jugador y por palabra.
+ * @param ARRAY $coleccionPartidas
+*/
+function ordenarPartidas($coleccionPartidas){
+  
+  /** Función interna, personalizada de ordenamiento. Compara dos valores de un arreglo asociativo, para ordenarlos. Primero ordena por nombre de jugador y luego por palabra. 
+   * @param STRING $a
+   * @param STRING $b
+   * @return STRING
+  */
+  function compararJugadorPalabra($a, $b) {
+    //STRING $resultado
+    $resultado = strcmp($a['jugador'], $b['jugador']);
+    
+    if ($resultado === 0) {
+        return strcmp($a['palabraWordix'], $b['palabraWordix']);
+    }
+    
+    return $resultado;
+  } 
+  
+  uasort($coleccionPartidas, 'compararJugadorPalabra'); //el método uasort ordena arreglos asociativos, manteniento la relación clave-valor luego del ordenamiento. El primer parámetro formal será el arreglo asociativo a ordenar. El segundo parámetro es una función personalizada de ordenamiento, que determina cómo se comparan los valores del arreglo asociativo.
+  print_r($coleccionPartidas); //el método print_r se utiliza para mostrar información sobre variables de una manera legible. En este caso, la utilizamos en un arreglo indexado de arreglos asociativos. El método muestra la información de una manera estructurada y legible, indicando los índices, y los pares clave-valor.
+}
+
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
 
 //Prueba funcionalidad.
-$partidasCargadas = cargarPartidas(300, cargarColeccionPalabras());
-print_r($partidasCargadas);
-estadisticasJugador($partidasCargadas, "ivan");
+$partidasCargadas = cargarPartidas(100, cargarColeccionPalabras());
+ordenarPartidas($partidasCargadas);
+
 
 //Declaración de variables:
 
