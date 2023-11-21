@@ -88,12 +88,12 @@ function cargarPartidas ($cantidadPartidas, $palabras) {
  * @return INT
 */
 function seleccionarOpcion(){
-  escribirAmarillo("Menú de opciones");
+  escribirVerde("Menú de opciones");
   echo " \n";
   echo "1- Jugar al Wordix con una palabra elegida \n";
   echo "2- Jugar al Wordix con una palabra aleatoria \n";
   echo "3- Mostrar una partida \n";
-  echo "4- Mostrar la primer partida ganadora \n";
+  echo "4- Mostrar la primer partida ganadora de un jugador \n";
   echo "5- Mostrar resumen del jugador \n";
   echo "6- Mostrar listado de partidas ordenadas por jugador y por palabra \n";
   echo "7- Agregar una palabra de 5 letras a Wordix \n";
@@ -107,10 +107,14 @@ function seleccionarOpcion(){
 /** Función que dado un número de partida (que corresponde al índice de un arreglo indexado de partidas) muestra en pantalla los datos de una partida particular.
  * @param INT $nroPartida
  * @param ARRAY $datosPartidas
+ * @return BOOLEAN
 */
 function mostrarPartida($nroPartida, $datosPartidas) {
   //INT $indice
+  //BOOLEAN $partidaExiste
+  $partidaExiste = false;
   if ($nroPartida > 0 && $nroPartida <= count($datosPartidas)) {
+    $partidaExiste = true;
     $indice = $nroPartida -1;
     escribirAmarillo("***********************************************");
     echo " \n";
@@ -127,8 +131,10 @@ function mostrarPartida($nroPartida, $datosPartidas) {
     echo " \n";
   } 
   else {
-    echo "Error. Partida no encontrada. Por favor ingrese un número de partida válido \n";
+    escribirRojo("Error. Partida no encontrada. Por favor ingrese un número de partida válido");
+    echo " \n";
   }
+  return $partidaExiste;
 }
 
 /**PUNTO 7 */
@@ -307,7 +313,7 @@ function ordenarPartidas($coleccionPartidas){
   print_r($coleccionPartidas); //el método print_r se utiliza para mostrar información sobre variables de una manera legible. En este caso, la utilizamos en un arreglo indexado de arreglos asociativos. El método muestra la información de una manera estructurada y legible, indicando los índices, y los pares clave-valor.
 }
 /**************************************/
-/****** FUNCIONES PERSONALIZADAS ******/
+/****** FUNCIONES MENU PRINCIPAL ******/
 /**************************************/
 
 /** Función diseñada para el menú principal. Cualquiera sea la tecla que ingrese el usuario se mostrará de nuevo el menú.
@@ -324,6 +330,20 @@ function presionarEnterContinuar(){
   return $opcion;
 }
 
+/** Función correspondiente a la opción número 3 del menú principal, que pide al usuario un número de partida y llama a una función "mostrarPartida" pasándole por parámetro dicho número de partida y la colección de partidas jugadas generadas en la sesión actual.Si la partida existe, muestra sus datos. Caso contrario pide nuevamente al usuario que ingrese un número válido.
+ * @param ARRAY $coleccionPartidas
+*/
+function menuOpcion3($coleccionPartidas){
+  //INT $partidaNro
+  //BOOLEAN $existe
+  do {
+    echo "Ingrese el número de partida que desea visualizar: ";
+    $partidaNro = trim(fgets(STDIN));
+    echo "Buscando partida... \n\n";
+    $existe = mostrarPartida((intval($partidaNro)), $coleccionPartidas);
+  } while (!$existe);
+}
+
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -332,40 +352,50 @@ function presionarEnterContinuar(){
 //print_r($partida);
 //imprimirResultado($partida);
 
+/*******DECLARACION DE VARIABLES*******/
 //INT $opcion
-//BOOLEAN $finPartida
+//ARRAY $palabras, $partidas
 
-$finPartida = false;
+$palabras = cargarColeccionPalabras();
+$partidas = cargarPartidas(100, $palabras);
   
 do {
   $opcion = seleccionarOpcion();
   switch ($opcion) {
     case 1:
-      echo "Opcion 1 seleccionada \n";
+      escribirVerde("Opcion 1 seleccionada");
+      echo " \n";
       $opcion = presionarEnterContinuar();
       break;
     case 2:
-      echo "Opcion 2 seleccionada \n";
+      escribirVerde("Opcion 2 seleccionada");
+      echo " \n";
       $opcion = presionarEnterContinuar();
       break;
     case 3:
-      echo "Opcion 3 seleccionada \n";
+      escribirVerde("Opcion 3 seleccionada");
+      echo " \n";
+      menuOpcion3($partidas);
       $opcion = presionarEnterContinuar();
       break;
     case 4:
-      echo "Opcion 4 seleccionada \n";
+      escribirVerde("Opcion 4 seleccionada");
+      echo " \n";
       $opcion = presionarEnterContinuar();
       break;
     case 5:
-      echo "Opcion 5 seleccionada";
+      escribirVerde("Opcion 5 seleccionada");
+      echo " \n";
       $opcion = presionarEnterContinuar();
       break;
     case 6:
-      echo "Opcion 6 seleccionada";
+      escribirVerde("Opcion 6 seleccionada");
+      echo " \n";
       $opcion = presionarEnterContinuar();
       break;
     case 7:
-      echo "Opcion 7 seleccionada";
+      escribirVerde("Opcion 7 seleccionada");
+      echo " \n";
       $opcion = presionarEnterContinuar();
       break;
     
