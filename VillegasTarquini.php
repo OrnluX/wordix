@@ -88,7 +88,8 @@ function cargarPartidas ($cantidadPartidas, $palabras) {
  * @return INT
 */
 function seleccionarOpcion(){
-  echo "Menú de opciones \n";
+  escribirAmarillo("Menú de opciones");
+  echo " \n";
   echo "1- Jugar al Wordix con una palabra elegida \n";
   echo "2- Jugar al Wordix con una palabra aleatoria \n";
   echo "3- Mostrar una partida \n";
@@ -305,52 +306,74 @@ function ordenarPartidas($coleccionPartidas){
   uasort($coleccionPartidas, 'compararJugadorPalabra'); //el método uasort ordena arreglos asociativos, manteniento la relación clave-valor luego del ordenamiento. El primer parámetro formal será el arreglo asociativo a ordenar. El segundo parámetro es una función personalizada de ordenamiento, que determina cómo se comparan los valores del arreglo asociativo.
   print_r($coleccionPartidas); //el método print_r se utiliza para mostrar información sobre variables de una manera legible. En este caso, la utilizamos en un arreglo indexado de arreglos asociativos. El método muestra la información de una manera estructurada y legible, indicando los índices, y los pares clave-valor.
 }
+/**************************************/
+/****** FUNCIONES PERSONALIZADAS ******/
+/**************************************/
 
+/** Función diseñada para el menú principal. Cualquiera sea la tecla que ingrese el usuario se mostrará de nuevo el menú.
+ * @return INT
+*/
+function presionarEnterContinuar(){
+  //STRING $tecla
+  //INT $opcion
+  echo "Presione ENTRAR para continuar";
+  $tecla = trim(fgets(STDIN));
+  if ($tecla != 9999) {
+    $opcion = 0;
+  }
+  return $opcion;
+}
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
-
-//Prueba funcionalidad.
-$partidasCargadas = cargarPartidas(100, cargarColeccionPalabras());
-ordenarPartidas($partidasCargadas);
-
-
-//Declaración de variables:
-
-
-//Inicialización de variables:
-
-
 //Proceso:
-
 //$partida = jugarWordix("MELON", strtolower("MaJo"));
 //print_r($partida);
 //imprimirResultado($partida);
 
+//INT $opcion
+//BOOLEAN $finPartida
 
-
-/*
+$finPartida = false;
+  
 do {
-    $opcion = ...;
-
+  $opcion = seleccionarOpcion();
+  switch ($opcion) {
+    case 1:
+      echo "Opcion 1 seleccionada \n";
+      $opcion = presionarEnterContinuar();
+      break;
+    case 2:
+      echo "Opcion 2 seleccionada \n";
+      $opcion = presionarEnterContinuar();
+      break;
+    case 3:
+      echo "Opcion 3 seleccionada \n";
+      $opcion = presionarEnterContinuar();
+      break;
+    case 4:
+      echo "Opcion 4 seleccionada \n";
+      $opcion = presionarEnterContinuar();
+      break;
+    case 5:
+      echo "Opcion 5 seleccionada";
+      $opcion = presionarEnterContinuar();
+      break;
+    case 6:
+      echo "Opcion 6 seleccionada";
+      $opcion = presionarEnterContinuar();
+      break;
+    case 7:
+      echo "Opcion 7 seleccionada";
+      $opcion = presionarEnterContinuar();
+      break;
     
-    switch ($opcion) {
-        case 1: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
+    default:
+      echo "Fin del programa.";
+      break;
+  }
 
-            break;
-        case 2: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
+} while ($opcion != 8);
 
-            break;
-        case 3: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-
-            break;
-        
-            //...
-    }
-} while ($opcion != X);
-*/
 
