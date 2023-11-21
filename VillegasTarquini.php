@@ -42,43 +42,44 @@ function cargarPartidas ($cantidadPartidas, $palabras) {
   $jugadores = ["ivan", "jose", "emiliano", "gaston", "german", "carolina", "antonella", "agustin", "gonzalo", "mario", "roberto", "cristian", "miguel", "daiana", "florencia", "marta", "julieta", "fernanda", "ana", "marcos"];
 
   $estadisticasPartidas = [];
-
-  $nuevaPartida = [
-       "palabraWordix" => "",
-       "jugador" => "",
-       "intentos" => 0,
-       "puntaje" => 0
-  ];
   
   $probabilidad = rand(1,10);
   
   for ($i = 0; $i < $cantidadPartidas; $i++) {
-      $nuevaPartida["palabraWordix"] = $palabras[(rand(0,(count($palabras)-1)))];
-      $nuevaPartida["jugador"] = $jugadores[(rand(0,(count($jugadores)-1)))];
       
+    $nuevaPartida = [
+      "palabraWordix" => "",
+      "jugador" => "",
+      "intentos" => 0,
+      "puntaje" => 0
+    ];
+      
+    $nuevaPartida["palabraWordix"] = $palabras[(rand(0,(count($palabras)-1)))];
+    $nuevaPartida["jugador"] = $jugadores[(rand(0,(count($jugadores)-1)))];
+      
+    if ($probabilidad < 8) {
+      $nuevaPartida["intentos"] = 6;
+    }
+    else {
+      $nuevaPartida["intentos"] = rand(1,6);
+    }
+      
+    if (($nuevaPartida["intentos"]) == 6) {
+      $probabilidad = rand(1,10);
       if ($probabilidad < 8) {
-        $nuevaPartida["intentos"] = 6;
+        $nuevaPartida["puntaje"] = 0;
       }
       else {
-        $nuevaPartida["intentos"] = rand(1,6);
+        $nuevaPartida["puntaje"] = rand(3,6);
       }
-      
-      if (($nuevaPartida["intentos"]) == 6) {
-        $probabilidad = rand(1,10);
-        if ($probabilidad < 8) {
-          $nuevaPartida["puntaje"] = 0;
-        }
-        else {
-          $nuevaPartida["puntaje"] = rand(3,6);
-        }
-      }
-      else if (($nuevaPartida["intentos"]) > 3){
-        $nuevaPartida["puntaje"] = rand(6,9);
-      }
-      else {
-        $nuevaPartida["puntaje"] = rand(10,15);
-      }
-      array_push($estadisticasPartidas, $nuevaPartida);
+    }
+    else if (($nuevaPartida["intentos"]) > 3){
+      $nuevaPartida["puntaje"] = rand(6,9);
+    }
+    else {
+      $nuevaPartida["puntaje"] = rand(10,15);
+    }
+    array_push($estadisticasPartidas, $nuevaPartida);
   }
     return $estadisticasPartidas;
 }
@@ -88,19 +89,29 @@ function cargarPartidas ($cantidadPartidas, $palabras) {
  * @return INT
 */
 function seleccionarOpcion(){
-  escribirVerde("Menú de opciones");
-  echo " \n";
-  echo "1- Jugar al Wordix con una palabra elegida \n";
-  echo "2- Jugar al Wordix con una palabra aleatoria \n";
-  echo "3- Mostrar una partida \n";
-  echo "4- Mostrar la primer partida ganadora de un jugador \n";
-  echo "5- Mostrar resumen del jugador \n";
-  echo "6- Mostrar listado de partidas ordenadas por jugador y por palabra \n";
-  echo "7- Agregar una palabra de 5 letras a Wordix \n";
-  echo "8- Salir del programa \n";
-  echo " \n";
+  echo "╔" . str_repeat("═", 69 - 2) . "╗\n";
+  escribirGris("Menú de opciones");
+  echo "                                                  ║\n";
+  echo "║";
+  echo "1- Jugar al Wordix con una palabra elegida                         ║\n";
+  echo "║";
+  echo "2- Jugar al Wordix con una palabra aleatoria                       ║\n";
+  echo "║";
+  echo "3- Mostrar una partida                                             ║\n";
+  echo "║";
+  echo "4- Mostrar la primer partida ganadora de un jugador                ║\n";
+  echo "║";
+  echo "5- Mostrar resumen del jugador                                     ║\n";
+  echo "║";
+  echo "6- Mostrar listado de partidas ordenadas por jugador y por palabra ║\n";
+  echo "║";
+  echo "7- Agregar una palabra de 5 letras a Wordix                        ║\n";
+  echo "║";
+  echo "8- Salir del programa                                              ║\n";
+  echo "╚" . str_repeat("═", 69 - 2) . "╝\n";
   echo "Ingrese la opción deseada: ";
   return solicitarNumeroEntre(1,8);
+  
 }
 
 /**PUNTO 6 */
@@ -116,7 +127,7 @@ function mostrarPartida($nroPartida, $datosPartidas) {
   if ($nroPartida > 0 && $nroPartida <= count($datosPartidas)) {
     $partidaExiste = true;
     $indice = $nroPartida -1;
-    escribirAmarillo("***********************************************");
+    escribirGris("***********************************************");
     echo " \n";
     echo "Partida WORDIX nro " . $nroPartida . ": palabra " . $datosPartidas[$indice]["palabraWordix"] . " \n";
     echo "Jugador/a: " . $datosPartidas[$indice]["jugador"] . " \n";
@@ -127,7 +138,7 @@ function mostrarPartida($nroPartida, $datosPartidas) {
     else {
       echo "Intento: Adivinó la palabra en " . $datosPartidas[$indice]["intentos"] . " intento(s). \n";
     }
-    escribirAmarillo("***********************************************");
+    escribirGris("***********************************************");
     echo " \n";
   } 
   else {
@@ -142,7 +153,7 @@ function mostrarPartida($nroPartida, $datosPartidas) {
 * @param ARRAY $coleccionPalabras
 * @return ARRAY 
 */
-function agregarPalabra($coleccionPalabras)
+function agregarPalabra(&$coleccionPalabras)
 {
   //STRING $palabra
   //INT $indice
@@ -152,18 +163,17 @@ function agregarPalabra($coleccionPalabras)
   $palabraExiste = false;
   $cantidadPalabras = count($coleccionPalabras);
   $palabra = leerPalabra5letras(); //Funcion de wordix que descarta palabras que no sean de 5 letras y convierte las letras de en mayusculas
-  do 
-  { 
-    if ($coleccionPalabras[$indice] == $palabra) { //verificamos que la palabra no esta en la coleccion
+  while ($indice < $cantidadPalabras) {
+    if ($coleccionPalabras[$indice] == $palabra) { // Verificamos que la palabra no esté en la colección
       $palabraExiste = true;
-    } else {
-      $indice++;
-    }
-  } while (!$palabraExiste && $indice < $cantidadPalabras);
+      break;
+  }
+    $indice++;
+  }
   
   if (!$palabraExiste)//si la palabra no existe en la coleccion se agrega en el array 
   {
-    array_push($coleccionPalabras, $palabra); 
+    array_push($coleccionPalabras, $palabra); // Agregamos la palabra al arreglo
     echo "Se agregó una nueva palabra a la colección!\n";
   }else{
     echo "La palabra ya existe en la colección\n";
@@ -248,7 +258,7 @@ function estadisticasJugador($partidas, $nombreJugador){
       $porcVictorias = 0;
     }
     
-    escribirAmarillo("***********************************************");
+    escribirGris("***********************************************");
     echo " \n";
     echo "Jugador: " . $nombreJugador . " \n";
     echo "Partidas: " . $partidasJugadas . " \n";
@@ -266,7 +276,7 @@ function estadisticasJugador($partidas, $nombreJugador){
       echo "            Adivinó en el intento " . $intento . ": " . $valor . " ". $pluralSingular . " \n";
     }
     
-    escribirAmarillo("***********************************************");
+    escribirGris("***********************************************");
     echo " \n";
   }
 }
@@ -349,7 +359,7 @@ function menuOpcion3($coleccionPartidas){
   } while (!$existe);
 }
 
-/** Función correspondiente a la opción número 4 del menú principal. Llama a otra función "primerPartidaGanada" para encontrar datos de la primer partida ganada por un determinado jugador, que el usuario deberá ingresar. En caso de existir esos datos, los muestra por pantalla, de lo contrario mostrará un mensaje por pantalla. 
+/** Función correspondiente a la opción número 4 del menú principal. Consulta en la base de datos de las partidas existentes, la primer partida ganada por un jugador. En caso de existir esos datos, los muestra por pantalla, de lo contrario mostrará un mensaje por pantalla. 
  * @param ARRAY $coleccionPartidas 
 */
 function menuOpcion4($coleccionPartidas) {
@@ -365,6 +375,16 @@ function menuOpcion4($coleccionPartidas) {
     echo " \n";
   }
 }
+
+/**  Función correspondiente a la opción número 5 del menú principal. Muestra las estadísticas de un jugador. Partidas jugadas, ganadas y porcentaje de victorias.
+ * @param ARRAY $coleccionPartidas
+*/
+function menuOpcion5($coleccionPartidas){
+  //STRING $jugador
+  $jugador = solicitarJugador();
+  estadisticasJugador($coleccionPartidas, $jugador);
+}
+
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
@@ -385,48 +405,50 @@ do {
   $opcion = seleccionarOpcion();
   switch ($opcion) {
     case 1:
-      escribirVerde("Opcion 1 seleccionada");
+      escribirGris("Opcion 1 seleccionada");
       echo " \n";
       $opcion = presionarEnterContinuar();
       break;
     case 2:
-      escribirVerde("Opcion 2 seleccionada");
+      escribirGris("Opcion 2 seleccionada");
       echo " \n";
       $opcion = presionarEnterContinuar();
       break;
     case 3:
-      escribirVerde("Opcion 3 seleccionada");
+      escribirGris("Opcion 3 seleccionada");
       echo " \n";
       menuOpcion3($partidas);
       $opcion = presionarEnterContinuar();
       break;
     case 4:
-      escribirVerde("Opcion 4 seleccionada");
+      escribirGris("Opcion 4 seleccionada");
       echo " \n";
       menuOpcion4($partidas);
       $opcion = presionarEnterContinuar();
       break;
     case 5:
-      escribirVerde("Opcion 5 seleccionada");
+      escribirGris("Opcion 5 seleccionada");
       echo " \n";
+      menuOpcion5($partidas);
       $opcion = presionarEnterContinuar();
       break;
     case 6:
-      escribirVerde("Opcion 6 seleccionada");
+      escribirGris("Opcion 6 seleccionada");
       echo " \n";
+      ordenarPartidas($partidas);
       $opcion = presionarEnterContinuar();
       break;
     case 7:
-      escribirVerde("Opcion 7 seleccionada");
+      escribirGris("Opcion 7 seleccionada");
       echo " \n";
+      agregarPalabra($palabras);
       $opcion = presionarEnterContinuar();
       break;
     
     default:
-      echo "Fin del programa.";
+      escribirRojo("Fin del programa");
       break;
   }
 
 } while ($opcion != 8);
-
 
