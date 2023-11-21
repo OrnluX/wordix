@@ -179,14 +179,19 @@ function agregarPalabra($coleccionPalabras)
 */
 function primerPartidaGanada($partidas, $nombre){
   //INT $indice
-  $nombre = strtolower($nombre);
+  //BOOLEAN $encontrado
   $indice = 0;
+  $encontrado = false;
   
-  while ( $indice < count($partidas) && $partidas[$indice]["jugador"] != $nombre) {
-    $indice++;
+  while ($indice < count($partidas)) {
+    if ($partidas[$indice]["jugador"] == $nombre && $partidas[$indice]["puntaje"] != 0) {
+      $encontrado  = true;
+      break;
+    }
+   $indice++;
   }
 
-  if ($indice == count($partidas)) {
+  if (!$encontrado) {
     $indice = -1;
   }
   
@@ -284,7 +289,7 @@ function solicitarJugador(){
       echo " \n";
     }
   } while (!(ctype_alpha($jugador[0])));
-  return $jugador;
+  return strtolower($jugador);
 }
 
 /**PUNTO 11 */
@@ -330,7 +335,7 @@ function presionarEnterContinuar(){
   return $opcion;
 }
 
-/** Función correspondiente a la opción número 3 del menú principal, que pide al usuario un número de partida y llama a una función "mostrarPartida" pasándole por parámetro dicho número de partida y la colección de partidas jugadas generadas en la sesión actual.Si la partida existe, muestra sus datos. Caso contrario pide nuevamente al usuario que ingrese un número válido.
+/** Función correspondiente a la opción número 3 del menú principal. Pide al usuario un número de partida y llama a una función "mostrarPartida" pasándole por parámetro dicho número y la colección de partidas jugadas generadas en la sesión actual. Si la partida existe, muestra sus datos. Caso contrario pide nuevamente al usuario que ingrese un número válido.
  * @param ARRAY $coleccionPartidas
 */
 function menuOpcion3($coleccionPartidas){
@@ -342,6 +347,23 @@ function menuOpcion3($coleccionPartidas){
     echo "Buscando partida... \n\n";
     $existe = mostrarPartida((intval($partidaNro)), $coleccionPartidas);
   } while (!$existe);
+}
+
+/** Función correspondiente a la opción número 4 del menú principal. Llama a otra función "primerPartidaGanada" para encontrar datos de la primer partida ganada por un determinado jugador, que el usuario deberá ingresar. En caso de existir esos datos, los muestra por pantalla, de lo contrario mostrará un mensaje por pantalla. 
+ * @param ARRAY $coleccionPartidas 
+*/
+function menuOpcion4($coleccionPartidas) {
+  //STRING $jugador
+  //INT $indice
+  $jugador = solicitarJugador();
+  $indice = primerPartidaGanada($coleccionPartidas, $jugador);
+  if ($indice != (-1)) {
+    mostrarPartida(($indice+1), $coleccionPartidas);
+  }
+  else {
+    escribirRojo("El/la jugador/a " . $jugador . " no ganó ninguna partida");
+    echo " \n";
+  }
 }
 
 /**************************************/
@@ -381,6 +403,7 @@ do {
     case 4:
       escribirVerde("Opcion 4 seleccionada");
       echo " \n";
+      menuOpcion4($partidas);
       $opcion = presionarEnterContinuar();
       break;
     case 5:
