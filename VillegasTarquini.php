@@ -150,7 +150,7 @@ function mostrarPartida($nroPartida, $datosPartidas) {
 }
 
 /**PUNTO 7 */
-/** COMPLETAR DOCUMENTACION
+/** Función que agrega una palabra a la colección de palabras que el juego trae por defecto.
 * @param ARRAY $coleccionPalabras
 * @return ARRAY 
 */
