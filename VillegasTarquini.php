@@ -70,14 +70,14 @@ function cargarPartidas ($cantidadPartidas, $palabras) {
         $nuevaPartida["puntaje"] = 0;
       }
       else {
-        $nuevaPartida["puntaje"] = rand(3,6);
+        $nuevaPartida["puntaje"] = rand(6,9);
       }
     }
     else if (($nuevaPartida["intentos"]) > 3){
-      $nuevaPartida["puntaje"] = rand(6,9);
+      $nuevaPartida["puntaje"] = rand(9,12);
     }
     else {
-      $nuevaPartida["puntaje"] = rand(10,15);
+      $nuevaPartida["puntaje"] = rand(12,16);
     }
     array_push($estadisticasPartidas, $nuevaPartida);
   }
@@ -127,7 +127,7 @@ function mostrarPartida($nroPartida, $datosPartidas) {
   if ($nroPartida > 0 && $nroPartida <= count($datosPartidas)) {
     $partidaExiste = true;
     $indice = $nroPartida -1;
-    escribirGris("***********************************************");
+    escribirBlanco("***********************************************");
     echo " \n";
     echo "Partida WORDIX nro " . $nroPartida . ": palabra " . $datosPartidas[$indice]["palabraWordix"] . " \n";
     echo "Jugador/a: " . $datosPartidas[$indice]["jugador"] . " \n";
@@ -138,7 +138,7 @@ function mostrarPartida($nroPartida, $datosPartidas) {
     else {
       echo "Intento: Adivinó la palabra en " . $datosPartidas[$indice]["intentos"] . " intento(s). \n";
     }
-    escribirGris("***********************************************");
+    escribirBlanco("***********************************************");
     echo " \n";
   } 
   else {
@@ -292,7 +292,7 @@ function solicitarJugador(){
     $jugador = trim(fgets(STDIN));
     if ((ctype_alpha($jugador[0]))) {
       escribirVerde("El nombre ha sido ingresado correctamente... ");
-      echo " \n";
+      echo " \n\n";
     } 
     else {
       escribirRojo("Error. El nombre debe comenzar con una letra ");
@@ -337,7 +337,7 @@ function ordenarPartidas($coleccionPartidas){
 function presionarEnterContinuar(){
   //STRING $tecla
   //INT $opcion
-  echo "Presione ENTRAR para continuar";
+  escribirAmarillo("Presione ENTRAR para continuar");
   $tecla = trim(fgets(STDIN));
   if ($tecla != 9999) {
     $opcion = 0;
@@ -406,41 +406,41 @@ do {
   switch ($opcion) {
     case 1:
       escribirGris("Opcion 1 seleccionada");
-      echo " \n";
+      echo " \n\n";
       $opcion = presionarEnterContinuar();
       break;
     case 2:
       escribirGris("Opcion 2 seleccionada");
-      echo " \n";
+      echo " \n\n";
       $opcion = presionarEnterContinuar();
       break;
     case 3:
       escribirGris("Opcion 3 seleccionada");
-      echo " \n";
+      echo " \n\n";
       menuOpcion3($partidas);
       $opcion = presionarEnterContinuar();
       break;
     case 4:
       escribirGris("Opcion 4 seleccionada");
-      echo " \n";
+      echo " \n\n";
       menuOpcion4($partidas);
       $opcion = presionarEnterContinuar();
       break;
     case 5:
       escribirGris("Opcion 5 seleccionada");
-      echo " \n";
+      echo " \n\n";
       menuOpcion5($partidas);
       $opcion = presionarEnterContinuar();
       break;
     case 6:
       escribirGris("Opcion 6 seleccionada");
-      echo " \n";
+      echo " \n\n";
       ordenarPartidas($partidas);
       $opcion = presionarEnterContinuar();
       break;
     case 7:
       escribirGris("Opcion 7 seleccionada");
-      echo " \n";
+      echo " \n\n";
       agregarPalabra($palabras);
       $opcion = presionarEnterContinuar();
       break;
@@ -451,4 +451,3 @@ do {
   }
 
 } while ($opcion != 8);
-

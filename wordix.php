@@ -88,6 +88,15 @@ function escribirGris($texto)
 }
 
 /**
+ * Escrbir un texto en color BLANCO 
+ * @param string $texto)
+ */
+function escribirBlanco($texto)
+{
+    echo "\033[46;37m $texto \033[0m";
+}
+
+/**
  * Escrbir un texto pantalla.
  * @param string $texto)
  */
@@ -342,9 +351,65 @@ function esIntentoGanado($estructuraPalabraIntento)
  * 
  */
 function obtenerPuntajeWordix($intento, $palabraElegida)
-{   //INT $puntaje
-    $puntaje = 7 - $intento;
-
+{   //INT $puntaje, $i, $j, $k
+    //ARRAY $vocales, $consMayores, $consMenores
+    //BOOLEAN $encontrada
+    $vocales = ["A", "E", "I", "O", "U"];
+    $consMenores = ["B", "C", "D", "F", "G", "H", "J", "K", "L", "M"];
+    $consMayores = ["N", "Ñ", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z"];
+    $puntaje = 0;
+    switch ($intento) {
+        case '1':
+            $puntaje +=6;
+            break;
+        case '2':
+            $puntaje +=5;
+            break;
+        case '3':
+            $puntaje +=4;
+            break;
+        case '4':
+            $puntaje +=3;
+            break;
+        case '5':
+            $puntaje +=2;
+            break;
+        case '6':
+            $puntaje +=1;
+            break;
+        default:
+            echo "ERROR. INTÉNTELO NUEVAMENTE \n";
+            break;
+    }
+   
+    if ($puntaje > 0) {
+        foreach (str_split($palabraElegida) as $letra) {
+            $encontrada = false;
+            while (!$encontrada) {
+                for ($i=0; $i < count($vocales); $i++) { 
+                    if ($letra == $vocales[$i]) {
+                        $puntaje +=1;
+                        $encontrada = true;
+                        break;
+                    }
+                }
+                for ($j=0; $j < count($consMenores); $j++) { 
+                    if ($letra == $consMenores[$j]) {
+                        $puntaje +=2;
+                        $encontrada = true;
+                        break;
+                    }
+                }
+                for ($k=0; $k < count($consMayores); $k++) { 
+                    if ($letra == $consMayores[$k]) {
+                        $puntaje +=3;
+                        $encontrada = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
     return $puntaje;
 }
 
