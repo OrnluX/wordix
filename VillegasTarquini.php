@@ -401,53 +401,55 @@ function menuOpcion5($coleccionPartidas){
 $palabras = cargarColeccionPalabras();
 $partidas = cargarPartidas(100, $palabras);
   
-do {
-  $opcion = seleccionarOpcion();
-  switch ($opcion) {
-    case 1:
-      escribirGris("Opcion 1 seleccionada");
-      echo " \n\n";
-      $opcion = presionarEnterContinuar();
-      break;
-    case 2:
-      escribirGris("Opcion 2 seleccionada");
-      echo " \n\n";
-      $opcion = presionarEnterContinuar();
-      break;
-    case 3:
-      escribirGris("Opcion 3 seleccionada");
-      echo " \n\n";
-      menuOpcion3($partidas);
-      $opcion = presionarEnterContinuar();
-      break;
-    case 4:
-      escribirGris("Opcion 4 seleccionada");
-      echo " \n\n";
-      menuOpcion4($partidas);
-      $opcion = presionarEnterContinuar();
-      break;
-    case 5:
-      escribirGris("Opcion 5 seleccionada");
-      echo " \n\n";
-      menuOpcion5($partidas);
-      $opcion = presionarEnterContinuar();
-      break;
-    case 6:
-      escribirGris("Opcion 6 seleccionada");
-      echo " \n\n";
-      ordenarPartidas($partidas);
-      $opcion = presionarEnterContinuar();
-      break;
-    case 7:
-      escribirGris("Opcion 7 seleccionada");
-      echo " \n\n";
-      agregarPalabra($palabras);
-      $opcion = presionarEnterContinuar();
-      break;
+// do {
+//   $opcion = seleccionarOpcion();
+//   switch ($opcion) {
+//     case 1:
+//       escribirGris("Opcion 1 seleccionada");
+//       echo " \n\n";
+//       $opcion = presionarEnterContinuar();
+//       break;
+//     case 2:
+//       escribirGris("Opcion 2 seleccionada");
+//       echo " \n\n";
+//       $opcion = presionarEnterContinuar();
+//       break;
+//     case 3:
+//       escribirGris("Opcion 3 seleccionada");
+//       echo " \n\n";
+//       menuOpcion3($partidas);
+//       $opcion = presionarEnterContinuar();
+//       break;
+//     case 4:
+//       escribirGris("Opcion 4 seleccionada");
+//       echo " \n\n";
+//       menuOpcion4($partidas);
+//       $opcion = presionarEnterContinuar();
+//       break;
+//     case 5:
+//       escribirGris("Opcion 5 seleccionada");
+//       echo " \n\n";
+//       menuOpcion5($partidas);
+//       $opcion = presionarEnterContinuar();
+//       break;
+//     case 6:
+//       escribirGris("Opcion 6 seleccionada");
+//       echo " \n\n";
+//       ordenarPartidas($partidas);
+//       $opcion = presionarEnterContinuar();
+//       break;
+//     case 7:
+//       escribirGris("Opcion 7 seleccionada");
+//       echo " \n\n";
+//       agregarPalabra($palabras);
+//       $opcion = presionarEnterContinuar();
+//       break;
     
-    default:
-      escribirRojo("Fin del programa");
-      break;
-  }
+//     default:
+//       escribirRojo("Fin del programa");
+//       break;
+//   }
 
-} while ($opcion != 8);
+// } while ($opcion != 8);
+
+echo obtenerPuntajeWordix(1, $palabras[1]);

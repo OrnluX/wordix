@@ -350,8 +350,8 @@ function esIntentoGanado($estructuraPalabraIntento)
  * @return INT
  * 
  */
-function obtenerPuntajeWordix($intento, $palabraElegida)
-{   //INT $puntaje, $i, $j, $k
+function obtenerPuntajeWordix($intento, $palabraElegida) {   
+    //INT $puntaje, $i, $j, $k
     //ARRAY $vocales, $consMayores, $consMenores
     //BOOLEAN $encontrada
     $vocales = ["A", "E", "I", "O", "U"];
@@ -393,18 +393,25 @@ function obtenerPuntajeWordix($intento, $palabraElegida)
                         break;
                     }
                 }
-                for ($j=0; $j < count($consMenores); $j++) { 
-                    if ($letra == $consMenores[$j]) {
-                        $puntaje +=2;
-                        $encontrada = true;
-                        break;
+                if ($encontrada) {
+                    break;
+                } 
+                else {
+                    for ($j=0; $j < count($consMenores); $j++) { 
+                        if ($letra == $consMenores[$j]) {
+                            $puntaje +=2;
+                            $encontrada = true;
+                            break;
+                        }
                     }
-                }
-                for ($k=0; $k < count($consMayores); $k++) { 
-                    if ($letra == $consMayores[$k]) {
-                        $puntaje +=3;
-                        $encontrada = true;
-                        break;
+                    if (!$encontrada) {
+                        for ($k=0; $k < count($consMayores); $k++) { 
+                            if ($letra == $consMayores[$k]) {
+                                $puntaje +=3;
+                                $encontrada = true;
+                                break;
+                            }
+                        }
                     }
                 }
             }
