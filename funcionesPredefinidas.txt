@@ -1,0 +1,34 @@
+*****FUNCIONES PREDEFINIDAS DE PHP*****
+
+ array_push():
+ La función array_push se utiliza para agregar uno o más elementos al final de un array. Su propósito principal es aumentar la longitud del array y agregar nuevos elementos al final de la lista.
+
+ intval():
+ La función intval se utiliza para obtener el valor entero de una variable. Su propósito principal es convertir el valor de una variable a un número entero.
+
+ count():
+ La función count se utiliza para contar el número de elementos en un array o el número de propiedades en un objeto.
+
+ rand():
+ La función rand se utiliza para generar un número entero aleatorio. 
+ 
+ str_repeat():
+ La función str_repeat se utiliza para repetir una cadena (string) un número específico de veces.
+ 
+ strtolower():
+ La función strtolower se utiliza para convertir todos los caracteres de una cadena (string) a minúsculas.
+
+ number_format():
+ La función number_format se utiliza para formatear números con decimales, añadiendo separadores de mil y especificando el número de decimales que deseas mostrar. 
+ 
+ ctype_alpha():
+ La función ctype_alpha se utiliza para comprobar si todos los caracteres de una cadena (string) son letras del alfabeto.
+
+ strcmp():
+ La función strcmp se utiliza para comparar dos cadenas (strings).
+
+ uasort():
+ La función uasort se utiliza para ordenar un array asociativo utilizando una función de comparación definida por el usuario. 
+ 
+ print_r():
+ La función print_r en PHP se utiliza para imprimir información fácilmente legible sobre una variable en un formato que es principalmente utilizado para la depuración y desarrollo. Puede imprimir información sobre variables escalares, arrays y objetos.
