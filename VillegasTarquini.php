@@ -66,11 +66,11 @@ function cargarPartidas ($cantidadPartidas, $palabras) {
       
     if (($nuevaPartida["intentos"]) == 6) {
       $probabilidad = rand(1,10);
-      if ($probabilidad < 8) {
+      if ($probabilidad < 7) {
         $nuevaPartida["puntaje"] = 0;
       }
       else {
-        $nuevaPartida["puntaje"] = rand(6,9);
+        $nuevaPartida["puntaje"] = rand(9,11);
       }
     }
     else if (($nuevaPartida["intentos"]) > 3){
@@ -231,6 +231,7 @@ function estadisticasJugador($partidas, $nombreJugador){
   $puntajeAcumulado = 0;
   $victorias = 0;
   $nombreJugador = strtolower($nombreJugador);
+  
   for ($i=0; $i < count($partidas); $i++) { 
     if (($partidas[$i]["jugador"]) == $nombreJugador) {
       $partidasJugadas++;
@@ -328,9 +329,8 @@ function ordenarPartidas($coleccionPartidas){
   print_r($coleccionPartidas); //el método print_r se utiliza para mostrar información sobre variables de una manera legible. En este caso, la utilizamos en un arreglo indexado de arreglos asociativos. El método muestra la información de una manera estructurada y legible, indicando los índices, y los pares clave-valor.
 }
 /**************************************/
-/****** FUNCIONES MENU PRINCIPAL ******/
+/****** FUNCIONES COMPLEMENTARIAS******/
 /**************************************/
-
 /** Función diseñada para el menú principal. Cualquiera sea la tecla que ingrese el usuario se mostrará de nuevo el menú.
  * @return INT
 */
@@ -343,6 +343,62 @@ function presionarEnterContinuar(){
     $opcion = 0;
   }
   return $opcion;
+}
+
+/** Función que verifica si un jugador ya jugó una partida con una palabra. Si ya existe una partida, la función devuelve true, de lo contrario devuelve false.
+ * @param ARRAY $partidas
+ * @param STRING $nombreJugador 
+ * @param STRING $palabra
+ * @return BOOLEAN
+*/
+function verificarPalabra($partidas, $nombreJugador, $palabra) {
+  //BOOLEAN $palabraUtilizada
+  //INT $indice
+  $palabraUtilizada = false;
+  $indice = 0;
+  while (!$palabraUtilizada && $indice < count($partidas)) {
+    if (($partidas[$indice]["jugador"]) == $nombreJugador && ($partidas[$indice]["palabraWordix"]) == $palabra) {
+      $palabraUtilizada = true;
+      break;
+    }
+    $indice ++;
+  }
+  return $palabraUtilizada;
+}
+
+/**************************************/
+/****** FUNCIONES MENU PRINCIPAL*******/
+/**************************************/
+/** Función correspondiente al menú principal, opciones 1 y 2. En la opción 1 el jugador juega Wordix con una palabra elegida e ingresada por él mismo. En la opción 2, juega un partida de Wordix con una palabra elegida al azar por el programa.
+ * @param ARRAY $palabrasWordix
+ * @param ARRAY $partidasWordix
+ * @param INT $opcionMenu
+*/
+function opcionMenu1y2($palabrasWordix, &$partidasWordix, $opcionMenu) {
+  //STRING $jugador, $palabra
+  //ARRAY $nuevaPartida
+  //BOOLEAN $palabraUtilizada
+  $jugador = solicitarJugador(); 
+  do {
+    if ($opcionMenu == 1) {
+      $palabra = leerPalabra5Letras();
+    }
+    else if ($opcionMenu == 2) {
+      $palabra = $palabrasWordix[rand(0, (count($palabrasWordix)-1))];
+    }
+    
+    $palabraUtilizada = verificarPalabra($partidasWordix, $jugador, $palabra);
+    
+    if (!$palabraUtilizada) {
+      $nuevaPartida = jugarWordix($palabra, $jugador);
+      array_push($partidasWordix, $nuevaPartida);
+    }
+    else {
+      escribirRojo("Palabra ya utilizada por el jugador. Por favor ingrese otra palabra");
+      echo " \n";
+    }
+  
+  } while ($palabraUtilizada);
 }
 
 /** Función correspondiente a la opción número 3 del menú principal. Pide al usuario un número de partida y llama a una función "mostrarPartida" pasándole por parámetro dicho número y la colección de partidas jugadas generadas en la sesión actual. Si la partida existe, muestra sus datos. Caso contrario pide nuevamente al usuario que ingrese un número válido.
@@ -389,67 +445,64 @@ function menuOpcion5($coleccionPartidas){
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
-//Proceso:
-//$partida = jugarWordix("MELON", strtolower("MaJo"));
-//print_r($partida);
-//imprimirResultado($partida);
 
 /*******DECLARACION DE VARIABLES*******/
 //INT $opcion
 //ARRAY $palabras, $partidas
 
+/*******INICIALIZACIÓN ESTRUCTURAS DE DATOS*******/
 $palabras = cargarColeccionPalabras();
 $partidas = cargarPartidas(100, $palabras);
   
-// do {
-//   $opcion = seleccionarOpcion();
-//   switch ($opcion) {
-//     case 1:
-//       escribirGris("Opcion 1 seleccionada");
-//       echo " \n\n";
-//       $opcion = presionarEnterContinuar();
-//       break;
-//     case 2:
-//       escribirGris("Opcion 2 seleccionada");
-//       echo " \n\n";
-//       $opcion = presionarEnterContinuar();
-//       break;
-//     case 3:
-//       escribirGris("Opcion 3 seleccionada");
-//       echo " \n\n";
-//       menuOpcion3($partidas);
-//       $opcion = presionarEnterContinuar();
-//       break;
-//     case 4:
-//       escribirGris("Opcion 4 seleccionada");
-//       echo " \n\n";
-//       menuOpcion4($partidas);
-//       $opcion = presionarEnterContinuar();
-//       break;
-//     case 5:
-//       escribirGris("Opcion 5 seleccionada");
-//       echo " \n\n";
-//       menuOpcion5($partidas);
-//       $opcion = presionarEnterContinuar();
-//       break;
-//     case 6:
-//       escribirGris("Opcion 6 seleccionada");
-//       echo " \n\n";
-//       ordenarPartidas($partidas);
-//       $opcion = presionarEnterContinuar();
-//       break;
-//     case 7:
-//       escribirGris("Opcion 7 seleccionada");
-//       echo " \n\n";
-//       agregarPalabra($palabras);
-//       $opcion = presionarEnterContinuar();
-//       break;
+do {
+  $opcion = seleccionarOpcion();
+  switch ($opcion) {
+    case 1:
+      escribirGris("Opcion 1 seleccionada");
+      echo " \n\n";
+      opcionMenu1y2($palabras, $partidas, $opcion);
+      $opcion = presionarEnterContinuar();
+      break;
+    case 2:
+      escribirGris("Opcion 2 seleccionada");
+      echo " \n\n";
+      opcionMenu1y2($palabras, $partidas, $opcion);
+      $opcion = presionarEnterContinuar();
+      break;
+    case 3:
+      escribirGris("Opcion 3 seleccionada");
+      echo " \n\n";
+      menuOpcion3($partidas);
+      $opcion = presionarEnterContinuar();
+      break;
+    case 4:
+      escribirGris("Opcion 4 seleccionada");
+      echo " \n\n";
+      menuOpcion4($partidas);
+      $opcion = presionarEnterContinuar();
+      break;
+    case 5:
+      escribirGris("Opcion 5 seleccionada");
+      echo " \n\n";
+      menuOpcion5($partidas);
+      $opcion = presionarEnterContinuar();
+      break;
+    case 6:
+      escribirGris("Opcion 6 seleccionada");
+      echo " \n\n";
+      ordenarPartidas($partidas);
+      $opcion = presionarEnterContinuar();
+      break;
+    case 7:
+      escribirGris("Opcion 7 seleccionada");
+      echo " \n\n";
+      agregarPalabra($palabras);
+      $opcion = presionarEnterContinuar();
+      break;
     
-//     default:
-//       escribirRojo("Fin del programa");
-//       break;
-//   }
+    default:
+      escribirRojo("Fin del programa");
+      break;
+  }
 
-// } while ($opcion != 8);
-
-echo obtenerPuntajeWordix(1, $palabras[1]);
+} while ($opcion != 8);
