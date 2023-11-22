@@ -8,8 +8,9 @@ function opcionMenu1y2($palabrasWordix, &$partidasWordix, $opcionMenu) {
     //STRING $jugador, $palabra
     //ARRAY $nuevaPartida
     //BOOLEAN $palabraUtilizada
-    $jugador = solicitarJugador(); 
+    
     do {
+        $jugador = solicitarJugador(); 
       if ($opcionMenu == 1) {
         $palabra = leerPalabra5Letras();
       }
