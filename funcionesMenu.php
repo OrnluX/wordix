@@ -30,12 +30,12 @@ function opcionMenu1y2($palabrasWordix, &$partidasWordix, $opcionMenu) {
       }
     
     } while ($palabraUtilizada);
-  }
+}
 
-  /** Función correspondiente a la opción número 3 del menú principal. Pide al usuario un número de partida y llama a una función "mostrarPartida" pasándole por parámetro dicho número y la colección de partidas jugadas generadas en la sesión actual. Si la partida existe, muestra sus datos. Caso contrario pide nuevamente al usuario que ingrese un número válido.
- * @param ARRAY $coleccionPartidas
+/** Función correspondiente a la opción número 3 del menú principal. Pide al usuario un número de partida y llama a una función "mostrarPartida" pasándole por parámetro dicho número y la colección de partidas jugadas generadas en la sesión actual. Si la partida existe, muestra sus datos. Caso contrario pide nuevamente al usuario que ingrese un número válido.
+* @param ARRAY $coleccionPartidas
 */
-function menuOpcion3($coleccionPartidas){
+function menuOpcion3($coleccionPartidas) {
     //INT $partidaNro
     //BOOLEAN $existe
     do {
@@ -44,12 +44,12 @@ function menuOpcion3($coleccionPartidas){
       echo "Buscando partida... \n\n";
       $existe = mostrarPartida((intval($partidaNro)), $coleccionPartidas);
     } while (!$existe);
-  }
+}
   
-  /** Función correspondiente a la opción número 4 del menú principal. Consulta en la base de datos de las partidas existentes, la primer partida ganada por un jugador. En caso de existir esos datos, los muestra por pantalla, de lo contrario mostrará un mensaje por pantalla. 
-   * @param ARRAY $coleccionPartidas 
-  */
-  function menuOpcion4($coleccionPartidas) {
+/** Función correspondiente a la opción número 4 del menú principal. Consulta en la base de datos de las partidas existentes, la primer partida ganada por un jugador. En caso de existir esos datos, los muestra por pantalla, de lo contrario mostrará un mensaje por pantalla. 
+* @param ARRAY $coleccionPartidas 
+*/
+function menuOpcion4($coleccionPartidas) {
     //STRING $jugador
     //INT $indice
     $jugador = solicitarJugador();
@@ -61,18 +61,18 @@ function menuOpcion3($coleccionPartidas){
       escribirRojo("El/la jugador/a " . $jugador . " no ganó ninguna partida");
       echo " \n";
     }
-  }
+}
   
-  /**  Función correspondiente a la opción número 5 del menú principal. Muestra las estadísticas de un jugador. Partidas jugadas, ganadas y porcentaje de victorias.
-   * @param ARRAY $coleccionPartidas
-  */
-  function menuOpcion5($coleccionPartidas){
+/**  Función correspondiente a la opción número 5 del menú principal. Muestra las estadísticas de un jugador. Partidas jugadas, ganadas y porcentaje de victorias.
+* @param ARRAY $coleccionPartidas
+*/
+function menuOpcion5($coleccionPartidas){
     //STRING $jugador
     $jugador = solicitarJugador();
     estadisticasJugador($coleccionPartidas, $jugador);
-  }
+}
 
-  /**************************************/
+/**************************************/
 /****** FUNCIONES COMPLEMENTARIAS******/
 /**************************************/
 /** Función diseñada para el menú principal. Cualquiera sea la tecla que ingrese el usuario se mostrará de nuevo el menú.
@@ -87,15 +87,15 @@ function presionarEnterContinuar(){
       $opcion = 0;
     }
     return $opcion;
-  }
+}
   
-  /** Función que verifica si un jugador ya jugó una partida con una palabra. Si ya existe una partida, la función devuelve true, de lo contrario devuelve false.
-   * @param ARRAY $partidas
-   * @param STRING $nombreJugador 
-   * @param STRING $palabra
-   * @return BOOLEAN
-  */
-  function verificarPalabra($partidas, $nombreJugador, $palabra) {
+/** Función que verifica si un jugador ya jugó una partida con una palabra. Si ya existe una partida, la función devuelve true, de lo contrario devuelve false.
+* @param ARRAY $partidas
+* @param STRING $nombreJugador 
+* @param STRING $palabra
+* @return BOOLEAN
+*/
+function verificarPalabra($partidas, $nombreJugador, $palabra) {
     //BOOLEAN $palabraUtilizada
     //INT $indice
     $palabraUtilizada = false;
@@ -108,6 +108,6 @@ function presionarEnterContinuar(){
       $indice ++;
     }
     return $palabraUtilizada;
-  }
+}
 
-  ?>
+?>
