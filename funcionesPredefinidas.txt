@@ -32,3 +32,19 @@
  
  print_r():
  La función print_r en PHP se utiliza para imprimir información fácilmente legible sobre una variable en un formato que es principalmente utilizado para la depuración y desarrollo. Puede imprimir información sobre variables escalares, arrays y objetos.
+
+is_numeric():
+La función is_numeric se utiliza para determinar si una variable es un número o una cadena numérica. Su propósito es verificar si el valor de una variable es numérico o puede ser convertido a un número.
+
+strlen():
+La función strlen se utiliza para obtener la longitud (número de caracteres) de una cadena (string).
+
+strtoupper():
+La función strtoupper se utiliza para convertir todos los caracteres de una cadena (string) a mayúsculas.
+
+strpos():
+La función strpos se utiliza para encontrar la posición de la primera ocurrencia de una subcadena (string) dentro de otra cadena. 
+
+str_split():
+La función str_split se utiliza para dividir una cadena (string) en un array de caracteres.
+
