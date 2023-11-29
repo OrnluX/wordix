@@ -459,7 +459,7 @@ function jugarWordix($palabraWordix, $nombreUsuario)
         $nroIntento = 0; //reset intento
         $puntaje = 0;
         echo "No lograste adivinar la palabra. La palabra era " . $palabraWordix . " \n";
-        echo "Seguí Jugando Wordix, la próxima será! ";
+        echo "Seguí Jugando Wordix, la próxima será! \n";
     }
 
     $partida = [
