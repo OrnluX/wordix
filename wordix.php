@@ -351,9 +351,8 @@ function esIntentoGanado($estructuraPalabraIntento)
  * 
  */
 function obtenerPuntajeWordix($intento, $palabraElegida) {   
-    //INT $puntaje, $i, $j, $k
+    //INT $puntaje
     //ARRAY $vocales, $consMayores, $consMenores
-    //BOOLEAN $encontrada
     $vocales = ["A", "E", "I", "O", "U"];
     $consMenores = ["B", "C", "D", "F", "G", "H", "J", "K", "L", "M"];
     $consMayores = ["N", "Ñ", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z"];
@@ -374,49 +373,22 @@ function obtenerPuntajeWordix($intento, $palabraElegida) {
         case '5':
             $puntaje +=2;
             break;
-        case '6':
+        default:
             $puntaje +=1;
             break;
-        default:
-            echo "ERROR. INTÉNTELO NUEVAMENTE \n";
-            break;
     }
-   
-    if ($puntaje > 0) {
-        foreach (str_split($palabraElegida) as $letra) {
-            $encontrada = false;
-            while (!$encontrada) {
-                for ($i=0; $i < count($vocales); $i++) { 
-                    if ($letra == $vocales[$i]) {
-                        $puntaje +=1;
-                        $encontrada = true;
-                        break;
-                    }
-                }
-                if ($encontrada) {
-                    break;
-                } 
-                else {
-                    for ($j=0; $j < count($consMenores); $j++) { 
-                        if ($letra == $consMenores[$j]) {
-                            $puntaje +=2;
-                            $encontrada = true;
-                            break;
-                        }
-                    }
-                    if (!$encontrada) {
-                        for ($k=0; $k < count($consMayores); $k++) { 
-                            if ($letra == $consMayores[$k]) {
-                                $puntaje +=3;
-                                $encontrada = true;
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+    
+    foreach (str_split($palabraElegida) as $letra) {
+        if (in_array($letra, $vocales)) {
+            $puntaje += 1;
+        } 
+        else if (in_array($letra, $consMenores)) {
+            $puntaje += 2;
+        } 
+        else if (in_array($letra, $consMayores)) {
+            $puntaje += 3;
+        }  
+    } 
     return $puntaje;
 }
 
