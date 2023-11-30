@@ -289,14 +289,14 @@ $partidas = cargarPartidas(100, $palabras);
   
 do {
   $opcion = seleccionarOpcion();
-  switch ($opcion) {
-    case 1:
+  switch ($opcion) { //La sentencia switch es una estructura alternativa múltiple. También se la llama estructura selectiva.
+    case 1: //Evalúa una expresión multi-valor y ejecuta las intrucciones de cada caso según el valor que corresponda a dicha expresión.
       escribirGris("Opcion 1 seleccionada");
       echo " \n\n";
       $nuevaPartida = opcionMenu1y2($palabras, $partidas, $opcion);
       array_push($partidas, $nuevaPartida);
       presionarEnterContinuar();
-      break;
+      break; //La sentencia break provoca que el flujo de control "salga" del switch, una vez ejecutadas las instrucciones del caso, y continúe con el programa.
     case 2:
       escribirGris("Opcion 2 seleccionada");
       echo " \n\n";
