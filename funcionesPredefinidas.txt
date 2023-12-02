@@ -48,8 +48,8 @@
  str_split():
  La función str_split se utiliza para dividir una cadena (string) en un array de caracteres.
 
-in_array():
-La función in_array() verifica si un valor específico está presente en un array. Devuelve true si el valor se encuentra en el array y false si no se encuentra.
+ in_array():
+ La función in_array() verifica si un valor específico está presente en un array. Devuelve true si el valor se encuentra en el array y false si no se encuentra.
 
-empty():
-La función empty() se utiliza para comprobar si una variable está vacía o no está definida. Devuelve true si la variable está vacía, false en otros casos, como por ejemplo: la variable no existe, la variable tiene un valor igual a 0, o bien, un string vacío, es null, es un array vacío.
+ empty():
+ La función empty() se utiliza para comprobar si una variable está vacía o no está definida. Devuelve true si la variable está vacía, false en otros casos, como por ejemplo: la variable no existe, la variable tiene un valor igual a 0, o bien, un string vacío, es null, es un array vacío.
