@@ -1,6 +1,6 @@
 # 🎮 Wordix - Juego de consola en PHP
 
-> Trabajo Final - Programación Estática y Laboratorio Web  
+> Trabajo Final - Introducción a la programación
 > Tecnicatura Universitaria en Desarrollo Web - UNCo
 
 Wordix es un juego de adivinanza de palabras inspirado en Wordle. Está completamente desarrollado en PHP y pensado para ejecutarse en consola.  
