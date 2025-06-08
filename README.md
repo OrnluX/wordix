@@ -1,47 +1,87 @@
-# Wordix
-Juego Wordix. Desarrollado en Introducción a la programación (FAI)
+# 🎮 Wordix - Juego de consola en PHP
 
-## Pre-requisitos
+> Trabajo Final - Programación Estática y Laboratorio Web  
+> Tecnicatura Universitaria en Desarrollo Web - UNCo
 
--[PHP](https://www.php.net/downloads.php) 
-Debes instalar PHP en tu ordenador.
+Wordix es un juego de adivinanza de palabras inspirado en Wordle. Está completamente desarrollado en PHP y pensado para ejecutarse en consola.  
+El objetivo es adivinar una palabra de 5 letras en hasta 6 intentos.
 
--[GIT](https://git-scm.com/downloads)
-Debes instalar GIT en tu ordenador
+---
 
+## 🚀 ¿Cómo jugar?
 
+### ✅ Requisitos previos
 
-## Instalación
+Debés tener instalado PHP en tu sistema.  
+Podés verificarlo con:
 
-
-Abre una terminal de tu preferencia y ejecuta los siguientes comandos:
-
-```command
-git init
-git clone https://github.com/OrnluX/wordix
+```bash
+php -v
 ```
 
-## Jugar Wordix
+### ▶️ Ejecutar el juego
 
-Ejecuta el siguiente comando en tu terminal:
+Abrí una terminal, navegá hasta el proyecto y ejecutá:
 
-```command
+```bash
 php VillegasTarquini.php
 ```
 
-## Materia 2023
+---
 
-Introducción a la programación
-Tecnicatura en Desarrollo Web
+## 🧠 ¿Cómo funciona Wordix?
 
-Facultad de Informática
+El juego muestra un menú con distintas opciones:
 
-Universidad Nacional Del Comahue
+- Jugar con una palabra ingresada
+- Jugar con una palabra aleatoria
+- Ver una partida específica
+- Ver estadísticas del jugador
+- Buscar la primera partida ganada
 
-## Integrantes del Grupo
+Durante la partida, el jugador tiene 6 intentos para adivinar la palabra.  
+El sistema indica si cada letra es:
 
-- ****Agustin Villegas**** - Legajo 4366 - maximiliano.villegas@est.fi.uncoma.edu.ar - Github: Villegas7
-- ****Sergio Ivan Tarquini**** - Legajo 5010 - ivantarquini91@gmail.com - Github: OrnluX
+🟩 Correcta y en la posición correcta  
+🟨 Correcta pero en otra posición  
+⬜ No está en la palabra
+
+---
+
+## 📁 Estructura del código
+
+- `VillegasTarquini.php`: flujo principal del juego
+- `wordix.php`: funciones del motor del juego (intentos, teclado, puntaje)
+- `funcionesMenu.php`: opciones del menú y lógica de navegación
+- `DisenioEstructurasVillegasTarquini.pdf`: documentación del diseño
+- `README.md`: este archivo
+
+---
+
+## 🔄 Diagrama del flujo de juego
+
+![Flujo de juego Wordix](./diagram-wordix.png)
+
+---
+
+## 👨‍💻 Autores
+
+- **Agustín Villegas**  
+  Legajo 4366  
+  maximiliano.villegas@est.fi.uncoma.edu.ar  
+  GitHub: [Villegas7](https://github.com/Villegas7)
+
+- **Sergio Iván Tarquini**  
+  Legajo 4461  
+  ivan.tarquini@est.fi.uncoma.edu.ar  
+  GitHub: [OrnluX](https://github.com/OrnluX)
+
+---
+
+## 🏫 Materia
+
+**Introducción a la programación (2023)**  
+Facultad de Informática - Universidad Nacional del Comahue
 
 
 
